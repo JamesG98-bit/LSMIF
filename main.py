@@ -3,6 +3,11 @@ import matplotlib.pyplot as plt
 import datetime as dt
 from pandas_datareader import data as web
 
+#TODO: Complete RSI Analysis.
+#TODO: Analyse object model.
+#TODO: Present to LSMIF.
+#TODO: Prepare to incorporate into web application.
+
 
 class Equity:
 
@@ -40,9 +45,12 @@ class Equity:
         ax.set_ylabel('Price(GBP)')
         ax.legend()
 
+    def rsi(self):
 
-
-
+        # DATA STRUCTURE
+        # DATE | ADJ | CHANGE = CLOSE - CLOSE - 1 | UP MOVE | DOWN MOVE
+        # CHANGE DATA
+        # https://www.macroption.com/rsi-calculation/
 if __name__ == "__main__":
 
     ticker = input('Please enter a ticker... ')
