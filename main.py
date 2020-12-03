@@ -1,6 +1,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 import datetime as dt
+import talib
 from pandas_datareader import data as web
 
 #TODO: Complete RSI Analysis.
@@ -29,6 +30,7 @@ class Equity:
 
         plt.style.use('fivethirtyeight')
         fig = plt.figure(figsize=(12, 6))
+
         ax = fig.add_subplot(111)
 
         x_axis = df.index.get_level_values(0)
@@ -47,10 +49,19 @@ class Equity:
 
     def rsi(self):
 
-        # DATA STRUCTURE
-        # DATE | ADJ | CHANGE = CLOSE - CLOSE - 1 | UP MOVE | DOWN MOVE
-        # CHANGE DATA
-        # https://www.macroption.com/rsi-calculation/
+        df = pd.DataFrame(self.df)
+        rsi = talib.RSI(df['Adj Close'])
+
+        fig = plt.figure()
+        fig.set_size_inches((25, 18))
+        ax_rsi = fig.add_axes((0, 0.24, 1, 0.2))
+        ax_rsi.plt(df.index, [70] * len(df.index), label="overbought")
+        ax_rsi.plot(df.index, [30] * len(df.index), label='oversold')
+        ax_rsi.plot(df.index, rsi, label="rsi")
+        ax_rsi.plot(df["Close"])
+        ax_rsi.legend()
+
+
 if __name__ == "__main__":
 
     ticker = input('Please enter a ticker... ')
@@ -61,4 +72,4 @@ if __name__ == "__main__":
         date.strftime("%d/%m/%Y")
 
     Object = Equity(ticker, end_date, start_date)
-    Object.bb()
+    Object.rsi()
