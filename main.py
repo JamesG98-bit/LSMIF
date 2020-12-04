@@ -1,7 +1,6 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 import datetime as dt
-import talib
 from pandas_datareader import data as web
 
 #TODO: Complete RSI Analysis.
@@ -50,16 +49,16 @@ class Equity:
     def rsi(self):
 
         df = pd.DataFrame(self.df)
-        rsi = talib.RSI(df['Adj Close'])
+        df['CHANGE'] = df['Adj Close'].diff()
 
-        fig = plt.figure()
+        '''fig = plt.figure()
         fig.set_size_inches((25, 18))
         ax_rsi = fig.add_axes((0, 0.24, 1, 0.2))
         ax_rsi.plt(df.index, [70] * len(df.index), label="overbought")
         ax_rsi.plot(df.index, [30] * len(df.index), label='oversold')
         ax_rsi.plot(df.index, rsi, label="rsi")
         ax_rsi.plot(df["Close"])
-        ax_rsi.legend()
+        ax_rsi.legend()'''
 
 
 if __name__ == "__main__":
