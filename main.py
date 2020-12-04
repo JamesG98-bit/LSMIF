@@ -71,4 +71,4 @@ if __name__ == "__main__":
         date.strftime("%d/%m/%Y")
 
     Object = Equity(ticker, end_date, start_date)
-    Object.rsi()
+    Object.bb()
